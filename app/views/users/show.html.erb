@@ -1,0 +1,20 @@
+<h1>マイページ</h1>
+
+<h2>過去に見たレシピ</h2>
+<ul>
+  <% @viewed_blogs.each do |blog| %>
+    <li><%= link_to blog.title, blog_path(blog) %></li>
+  <% end %>
+</ul>
+
+<h2>自分の作成したレシピ</h2>
+<ul>
+  <% @user.blogs.each do |blog| %>
+    <li>
+      <h3><%= blog.title %></h3>
+      <p><%= blog.content %></p>
+      <%= link_to '編集', edit_blog_path(blog) %> |
+      <%= link_to '削除', blog_path(blog), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+    </li>
+  <% end %>
+</ul>

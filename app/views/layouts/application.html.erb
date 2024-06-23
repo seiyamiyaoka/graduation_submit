@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>recipe app</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <h1>Recipe App</h1>
+        <nav>
+          <% if user_signed_in? %>
+            <%= link_to "レシピ一覧", blogs_path %>
+            <%= link_to 'マイページ', mypage_path %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "新規登録", new_user_registration_path %>
+            <%= link_to "ログイン", user_session_path %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <% unless user_signed_in? %>
+        <section class="service-overview">
+          <div class="container">
+            <h2>サービス概要</h2>
+            <p>何を作るか迷う料理、、あなたの料理のレパートリーを広げるため私たちがレシピを提案します。</p>
+            <p>レシピを検索し、お気に入りの料理を見つけて、作り方を学びましょう。<strong>Recipe App</strong>で料理を楽しむ毎日を始めましょう！</p>
+          </div>
+        </section>
+      <% end %>
+
+      <%= yield %>
+      
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Recipe App. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

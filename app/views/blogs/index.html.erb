@@ -1,0 +1,60 @@
+<% if user_signed_in? %>
+  <%= search_form_for @q, url: blogs_path, method: :get do |f| %>
+    <div class="field">
+      <%= f.label :title_or_content_cont, "キーワード検索" %>
+      <%= f.text_field :title_or_content_cont %>
+    </div>
+    <div class="actions">
+      <%= f.submit "検索" %>
+    </div>
+  <% end %>
+
+  <% @blogs.each do |blog| %>
+    <div class="blog-entry">
+      <h2><%= blog.title %></h2>
+      <div class="blog-content">
+        <p><%= blog.content %></p>
+        <% if blog.image.attached? %>
+          <div class="blog-image">
+            <%= image_tag blog.image.variant(resize_to_limit: [300, 300]) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="blog-details">
+        <p><strong>材料:</strong> <%= blog.ingredients %></p>
+        <p><strong>カロリー:</strong> <%= blog.calories %> kcal</p>
+      </div>
+      <div class="blog-actions">
+        <%= link_to '詳細', blog %>
+        <% if current_user.admin? %>
+          <%= link_to '編集', edit_blog_path(blog) %>
+          
+          <%= link_to '削除', blog_path(blog), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <%= link_to 'レシピ投稿', new_blog_path %>
+<% else %>
+  <%= form_with(model: @user, url: user_session_path, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.email_field :email, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <div class="field">
+      <%= form.check_box :remember_me %>
+      <%= form.label :remember_me %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Log in" %>
+    </div>
+  <% end %>
+<% end %>

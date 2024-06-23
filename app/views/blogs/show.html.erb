@@ -1,0 +1,73 @@
+<h2>
+  <strong>料理名:</strong>
+  <%= @blog.title %>
+</h2>
+
+<div class="blog-details">
+  <% if @blog.image.attached? %>
+    <div class="blog-image">
+      <%= image_tag @blog.image.variant(resize_to_limit: [350, 350]) %>
+    </div>
+  <% end %>
+
+  <div class="blog-content">
+    <div class="blog-box">
+      <p>
+        <strong>材料:</strong>
+        <%= @blog.ingredients %>
+      </p>
+
+      <p>
+        <strong>レシピ:</strong>
+        <% @blog.content.split('。').each do |sentence| %>
+          <p><%= sentence %>。
+        <% end %>
+      </p>
+
+      <p>
+        <strong>カロリー:</strong>
+        <%= @blog.calories %> kcal
+      </p>
+    </div>
+  </div>
+</div>
+
+<%= link_to '戻る', blogs_path %>
+
+<% if current_user == @blog.user %>
+  <%= link_to "編集", edit_blog_path(@blog) %> |
+  <%= link_to "削除", @blog, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+<% end %>
+
+
+<style>
+  .blog-details {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .blog-image {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .blog-content {
+    flex: 2;
+  }
+
+  .blog-box {
+    border: 2px solid #45a049;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-box p {
+    margin: 10px 0;
+  }
+
+  .blog-box strong {
+    color: #45a049;
+  }
+</style>

@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      blog: "ブログ"
+    attributes:
+      blog:
+        title: "タイトル"
+        content: "内容"
+        image: "画像"
+        ingredients: "材料"
+        calories: "カロリー"
+        user: "ユーザー"
+    errors:
+      models:
+        blog:
+          attributes:
+            user:
+              required: "ユーザーを入力してください"
+  errors:
+    messages:
+      required: "を入力してください"
