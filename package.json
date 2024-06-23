@@ -17,12 +17,11 @@
   "engines": {
     "node": "14.21.3"
   },
-
   "devDependencies": {
     "webpack-dev-server": "^3"
   },
   "resolutions": {
+    "@fortawesome/fontawesome-free": "^5.15.0",
     "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
   }
-  
 }
