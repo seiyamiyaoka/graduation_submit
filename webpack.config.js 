@@ -1,0 +1,35 @@
+const path = require('path');
+
+module.exports = {
+  entry: {
+    application: './app/javascript/packs/application.js',
+    rails_admin: './app/assets/stylesheets/rails_admin.scss'
+  },
+  output: {
+    filename: '[name]-[hash].js',
+    path: path.resolve(__dirname, 'public', 'packs'),
+    publicPath: '/packs/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ]
+  }
+};
