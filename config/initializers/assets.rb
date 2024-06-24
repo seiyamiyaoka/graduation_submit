@@ -18,3 +18,4 @@ Rails.application.config.assets.enabled = true
 Rails.application.config.assets.initialize_on_precompile = false
 # Add Rails Admin assets (required)
 Rails.application.config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js']
+ 

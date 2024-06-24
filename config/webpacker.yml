@@ -2,7 +2,6 @@
 
 default: &default
   source_path: app/javascript
-  resolved_paths: ['app/assets']
   source_entry_path: packs
   public_root_path: public
   public_output_path: packs
